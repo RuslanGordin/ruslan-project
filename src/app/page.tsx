@@ -15,7 +15,7 @@ import Portfolio from "@/app/components/portfolio";
 import Skills from "@/app/components/skills/index";
 import Contact from "@/app/components/contact/index";
 import Experience from "@/app/components/experience";
-import { FaGithub, FaTelegram, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaTelegram, FaLinkedin, FaFileAlt } from "react-icons/fa";
 import { tabs } from "@/app/components/arrays";
 
 const Home = () => {
@@ -93,6 +93,14 @@ const Home = () => {
                 rel="noopener noreferrer"
               >
                 <FaTelegram />
+              </a>
+              <a
+                href="/ruslan_gordin_resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <FaFileAlt />
               </a>
               {/* <a
                 href="https://linkedin.com/in/yourusername"
