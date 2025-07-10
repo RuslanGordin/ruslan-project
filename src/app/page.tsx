@@ -1,95 +1,132 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  DivBoxAboutMeSC,
+  DivContainerSC,
+  NameSC,
+  TextAboutSC,
+  TextSpecialSC,
+  SocialLinksSC,
+  NavLinksSC,
+} from "@/app/home.styles";
+import AboutMe from "@/app/components/aboutMe/index";
+import Portfolio from "@/app/components/portfolio";
+import Skills from "@/app/components/skills/index";
+import Contact from "@/app/components/contact/index";
+import Experience from "@/app/components/experience";
+import { FaGithub, FaTelegram, FaLinkedin } from "react-icons/fa";
+import { tabs } from "@/app/components/arrays";
 
-export default function Home() {
+const Home = () => {
+  const fadeInUp = {
+    initial: { y: 60, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    transition: { duration: 0.6 },
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    if (sectionId === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    // Remove the hash and ensure we have a clean ID
+    const id = sectionId.replace("#", "").trim();
+    const section = document.getElementById(id);
+
+    if (section) {
+      // Add a small delay to ensure smooth scrolling
+      setTimeout(() => {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    } else {
+      console.warn(`Section with id "${id}" not found`);
+    }
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <DivContainerSC>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        variants={{
+          animate: {
+            transition: {
+              staggerChildren: 0.1,
+            },
+          },
+        }}
+      >
+        <motion.div {...fadeInUp}>
+          <DivBoxAboutMeSC>
+            <NameSC>Ruslan Gordin</NameSC>
+            <TextSpecialSC>Front End Engineer</TextSpecialSC>
+            <TextAboutSC $width={"max-content"} $margin={"0"}>
+              I build accessible, pixel-perfect digital experiences for the web.
+            </TextAboutSC>
+            <NavLinksSC>
+              {tabs.map((tab, index) => (
+                <motion.button
+                  key={tab.name}
+                  onClick={() => scrollToSection(tab.link)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {tab.name}
+                </motion.button>
+              ))}
+            </NavLinksSC>
+            <SocialLinksSC>
+              <a
+                href="https://github.com/RuslanGordin"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://t.me/gord1n_ruslan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTelegram />
+              </a>
+              {/* <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin />
+              </a> */}
+            </SocialLinksSC>
+          </DivBoxAboutMeSC>
+        </motion.div>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <motion.div {...fadeInUp}>
+          <AboutMe />
+        </motion.div>
+
+        <motion.div {...fadeInUp}>
+          <Skills />
+        </motion.div>
+
+        <motion.div {...fadeInUp}>
+          <Experience />
+        </motion.div>
+
+        <motion.div {...fadeInUp}>
+          <Portfolio />
+        </motion.div>
+
+        <motion.div {...fadeInUp}>
+          <Contact />
+        </motion.div>
+      </motion.div>
+    </DivContainerSC>
   );
-}
+};
+
+export default Home;
