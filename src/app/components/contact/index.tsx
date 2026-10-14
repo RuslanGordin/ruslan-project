@@ -182,7 +182,7 @@ const Contact = () => {
             whileHover={{ x: 10 }}
           >
             <FiPhone />
-            <p>+7(939)-876-51-41</p>
+            <p>+7(903)-286-29-91</p>
           </InfoItem>
           <InfoItem
             initial={{ opacity: 0, x: -20 }}
@@ -192,7 +192,7 @@ const Contact = () => {
           >
             <FiMapPin />
             <p>
-              Krasnoyarsk Krai
+              Moscow
               <br />
               Russia
             </p>
@@ -206,7 +206,7 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <input type="hidden" name="_next" value="https://localhost:3000" />
+          <input type="hidden" name="_next" value="https://ruslan-project.vercel.app/" />
           <input
             type="hidden"
             name="_subject"
